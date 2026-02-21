@@ -1,10 +1,11 @@
 /**
  * HomeScreen.tsx
  * The main landing screen of Agrisaarthi.
- * Displays a welcoming card layout with the app branding.
+ * Displays a personalized greeting using the farmer's name
+ * from AsyncStorage, plus feature cards.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -12,9 +13,30 @@ import {
     StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../constants/colors';
+import type { FarmerProfile } from '../types/farmer';
 
 const HomeScreen: React.FC = () => {
+    const [farmerName, setFarmerName] = useState<string>('Farmer');
+
+    useEffect(() => {
+        /** Load farmer profile from AsyncStorage to display greeting */
+        const loadProfile = async () => {
+            try {
+                const data = await AsyncStorage.getItem('farmer_profile');
+                if (data) {
+                    const profile: FarmerProfile = JSON.parse(data);
+                    setFarmerName(profile.fullName);
+                }
+            } catch (error) {
+                console.error('Error loading farmer profile:', error);
+            }
+        };
+
+        loadProfile();
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
@@ -35,7 +57,9 @@ const HomeScreen: React.FC = () => {
             <View style={styles.content}>
                 <View style={styles.card}>
                     <Text style={styles.cardIcon}>🌱</Text>
-                    <Text style={styles.cardTitle}>Welcome to Agrisaarthi</Text>
+                    <Text style={styles.cardTitle}>
+                        Namaste, {farmerName}! 🙏
+                    </Text>
                     <Text style={styles.cardDescription}>
                         Empowering Indian farmers with smart tools for weather
                         forecasting, crop management, and AI-driven insights.
