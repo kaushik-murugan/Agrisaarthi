@@ -1,0 +1,185 @@
+/**
+ * HomeScreen.tsx
+ * The main landing screen of Agrisaarthi.
+ * Displays a welcoming card layout with the app branding.
+ */
+
+import React from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    StatusBar,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Colors from '../constants/colors';
+
+const HomeScreen: React.FC = () => {
+    return (
+        <SafeAreaView style={styles.container}>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor={Colors.primary}
+            />
+
+            {/* ── Header area ────────────────────────────────────────── */}
+            <View style={styles.header}>
+                <Text style={styles.headerEmoji}>🌾</Text>
+                <Text style={styles.headerTitle}>Agrisaarthi</Text>
+                <Text style={styles.headerSubtitle}>
+                    Your Smart Farming Companion
+                </Text>
+            </View>
+
+            {/* ── Welcome card ───────────────────────────────────────── */}
+            <View style={styles.content}>
+                <View style={styles.card}>
+                    <Text style={styles.cardIcon}>🌱</Text>
+                    <Text style={styles.cardTitle}>Welcome to Agrisaarthi</Text>
+                    <Text style={styles.cardDescription}>
+                        Empowering Indian farmers with smart tools for weather
+                        forecasting, crop management, and AI-driven insights.
+                    </Text>
+                </View>
+
+                {/* ── Feature pills ──────────────────────────────────────── */}
+                <View style={styles.featuresRow}>
+                    <View style={styles.featurePill}>
+                        <Text style={styles.featureEmoji}>🌤️</Text>
+                        <Text style={styles.featureText}>Weather</Text>
+                    </View>
+                    <View style={styles.featurePill}>
+                        <Text style={styles.featureEmoji}>🤖</Text>
+                        <Text style={styles.featureText}>AI Advice</Text>
+                    </View>
+                    <View style={styles.featurePill}>
+                        <Text style={styles.featureEmoji}>🌿</Text>
+                        <Text style={styles.featureText}>Crop Care</Text>
+                    </View>
+                </View>
+            </View>
+
+            {/* ── Footer tagline ────────────────────────────────────── */}
+            <View style={styles.footer}>
+                <Text style={styles.footerText}>
+                    🇮🇳  Made for Indian farmers
+                </Text>
+            </View>
+        </SafeAreaView>
+    );
+};
+
+/* ── Styles ─────────────────────────────────────────────────────── */
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: Colors.background,
+    },
+
+    // Header
+    header: {
+        backgroundColor: Colors.primary,
+        paddingVertical: 32,
+        paddingHorizontal: 24,
+        alignItems: 'center',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+    },
+    headerEmoji: {
+        fontSize: 48,
+        marginBottom: 8,
+    },
+    headerTitle: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: Colors.textLight,
+        letterSpacing: 1,
+    },
+    headerSubtitle: {
+        fontSize: 14,
+        color: Colors.textLight,
+        opacity: 0.85,
+        marginTop: 4,
+    },
+
+    // Content
+    content: {
+        flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 24,
+    },
+
+    // Card
+    card: {
+        backgroundColor: Colors.surface,
+        borderRadius: 16,
+        padding: 24,
+        alignItems: 'center',
+        // Shadow (iOS)
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        // Elevation (Android)
+        elevation: 4,
+    },
+    cardIcon: {
+        fontSize: 40,
+        marginBottom: 12,
+    },
+    cardTitle: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: Colors.textPrimary,
+        marginBottom: 8,
+        textAlign: 'center',
+    },
+    cardDescription: {
+        fontSize: 14,
+        color: Colors.textSecondary,
+        textAlign: 'center',
+        lineHeight: 22,
+    },
+
+    // Feature pills
+    featuresRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 24,
+    },
+    featurePill: {
+        backgroundColor: Colors.surface,
+        borderRadius: 12,
+        paddingVertical: 14,
+        paddingHorizontal: 18,
+        alignItems: 'center',
+        minWidth: 90,
+        // Shadow
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.06,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    featureEmoji: {
+        fontSize: 24,
+        marginBottom: 4,
+    },
+    featureText: {
+        fontSize: 12,
+        fontWeight: '600',
+        color: Colors.textPrimary,
+    },
+
+    // Footer
+    footer: {
+        paddingVertical: 16,
+        alignItems: 'center',
+    },
+    footerText: {
+        fontSize: 12,
+        color: Colors.textMuted,
+    },
+});
+
+export default HomeScreen;

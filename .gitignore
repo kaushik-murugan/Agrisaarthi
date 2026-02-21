@@ -1,5 +1,21 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+# Environment variables (API keys - NEVER push these)
+.env
+.env.local
+.env.development
+.env.production
+
+# VS Code settings
+.vscode/
+
+# Windows
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
 # dependencies
 node_modules/
 
