@@ -5,6 +5,10 @@
  * Step 1 — Personal Information (name, village, language)
  * Step 2 — Farm Information (crop, soil, size, irrigation)
  * Step 3 — Confirmation summary + save to AsyncStorage
+ *
+ * All user-facing strings are resolved via the useTranslation hook,
+ * so the UI adapts to the farmer's preferred language.
+ * Note: On first launch (no saved profile), English is used as the default.
  */
 
 import React, { useState } from 'react';
@@ -34,6 +38,9 @@ import type { RootStackParamList } from '../navigation/AppNavigator';
 
 // Constants
 import Colors from '../constants/colors';
+
+// Translation hook
+import { useTranslation } from '../hooks/useTranslation';
 
 // ── Dropdown option arrays ──────────────────────────────────────────
 const LANGUAGE_OPTIONS = ['English', 'Hindi', 'Tamil', 'Telugu'];
@@ -73,6 +80,9 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
     // ── Saving state ──
     const [isSaving, setIsSaving] = useState(false);
+
+    /** Translation hook — defaults to English on first launch */
+    const { t } = useTranslation();
 
     /**
      * Validates that all required fields for the current step are filled.
@@ -151,12 +161,12 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.stepContainer}>
             <View style={styles.sectionHeader}>
                 <Text style={styles.sectionEmoji}>👤</Text>
-                <Text style={styles.sectionTitle}>Personal Information</Text>
+                <Text style={styles.sectionTitle}>{t('personalInfo')}</Text>
             </View>
 
             <View style={styles.card}>
                 {/* Full Name */}
-                <Text style={styles.inputLabel}>Full Name *</Text>
+                <Text style={styles.inputLabel}>{t('name')} *</Text>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Enter your full name"
@@ -168,7 +178,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
                 />
 
                 {/* Village / District */}
-                <Text style={styles.inputLabel}>Village / District *</Text>
+                <Text style={styles.inputLabel}>{t('location')} *</Text>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Enter your village or district"
@@ -181,7 +191,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Preferred Language */}
                 <DropdownPicker
-                    label="Preferred Language *"
+                    label={`${t('language')} *`}
                     options={LANGUAGE_OPTIONS}
                     selectedValue={preferredLanguage}
                     onValueChange={setPreferredLanguage}
@@ -198,13 +208,13 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.stepContainer}>
             <View style={styles.sectionHeader}>
                 <Text style={styles.sectionEmoji}>🌾</Text>
-                <Text style={styles.sectionTitle}>Farm Information</Text>
+                <Text style={styles.sectionTitle}>{t('farmInfo')}</Text>
             </View>
 
             <View style={styles.card}>
                 {/* Primary Crop */}
                 <DropdownPicker
-                    label="Primary Crop *"
+                    label={`${t('crop')} *`}
                     options={CROP_OPTIONS}
                     selectedValue={primaryCrop}
                     onValueChange={setPrimaryCrop}
@@ -213,7 +223,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Soil Type */}
                 <DropdownPicker
-                    label="Soil Type *"
+                    label={`${t('soilType')} *`}
                     options={SOIL_OPTIONS}
                     selectedValue={soilType}
                     onValueChange={setSoilType}
@@ -221,7 +231,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
                 />
 
                 {/* Farm Size */}
-                <Text style={styles.inputLabel}>Farm Size (acres) *</Text>
+                <Text style={styles.inputLabel}>{t('farmSize')} *</Text>
                 <View style={styles.farmSizeRow}>
                     <TextInput
                         style={[styles.textInput, styles.farmSizeInput]}
@@ -239,7 +249,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
 
                 {/* Irrigation Type */}
                 <DropdownPicker
-                    label="Irrigation Type *"
+                    label={`${t('irrigationType')} *`}
                     options={IRRIGATION_OPTIONS}
                     selectedValue={irrigationType}
                     onValueChange={setIrrigationType}
@@ -256,23 +266,23 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.stepContainer}>
             <View style={styles.sectionHeader}>
                 <Text style={styles.sectionEmoji}>✅</Text>
-                <Text style={styles.sectionTitle}>Confirm Your Details</Text>
+                <Text style={styles.sectionTitle}>{t('confirmation')}</Text>
             </View>
 
             {/* Summary card */}
             <View style={styles.card}>
-                <Text style={styles.summaryHeading}>👤 Personal Details</Text>
-                <SummaryRow label="Name" value={fullName} />
-                <SummaryRow label="Village / District" value={village} />
-                <SummaryRow label="Language" value={preferredLanguage} />
+                <Text style={styles.summaryHeading}>👤 {t('personalInfo')}</Text>
+                <SummaryRow label={t('name')} value={fullName} />
+                <SummaryRow label={t('location')} value={village} />
+                <SummaryRow label={t('language')} value={preferredLanguage} />
 
                 <View style={styles.summaryDivider} />
 
-                <Text style={styles.summaryHeading}>🌾 Farm Details</Text>
-                <SummaryRow label="Primary Crop" value={primaryCrop} />
-                <SummaryRow label="Soil Type" value={soilType} />
-                <SummaryRow label="Farm Size" value={`${farmSize} acres`} />
-                <SummaryRow label="Irrigation" value={irrigationType} />
+                <Text style={styles.summaryHeading}>🌾 {t('farmInfo')}</Text>
+                <SummaryRow label={t('crop')} value={primaryCrop} />
+                <SummaryRow label={t('soilType')} value={soilType} />
+                <SummaryRow label={t('farmSize')} value={`${farmSize} acres`} />
+                <SummaryRow label={t('irrigationType')} value={irrigationType} />
             </View>
 
             {/* Finish button */}
@@ -284,7 +294,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
             >
                 <Text style={styles.finishButtonEmoji}>🚜</Text>
                 <Text style={styles.finishButtonText}>
-                    {isSaving ? 'Saving...' : 'Start Farming with Agrisaarthi'}
+                    {isSaving ? t('loading') : t('startButton')}
                 </Text>
             </TouchableOpacity>
         </View>
@@ -300,8 +310,10 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
             {/* App title */}
             <View style={styles.header}>
                 <Text style={styles.headerEmoji}>🌱</Text>
-                <Text style={styles.headerTitle}>Agrisaarthi</Text>
-                <Text style={styles.headerSubtitle}>Let's set up your farm profile</Text>
+                <Text style={styles.headerTitle}>{t('appName')}</Text>
+                <Text style={styles.headerSubtitle}>
+                    {t('step', { current: step, total: TOTAL_STEPS })}
+                </Text>
             </View>
 
             {/* Progress bar */}
@@ -334,7 +346,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
                             onPress={handleBack}
                             activeOpacity={0.7}
                         >
-                            <Text style={styles.backButtonText}>← Back</Text>
+                            <Text style={styles.backButtonText}>← {t('back')}</Text>
                         </TouchableOpacity>
                     ) : (
                         <View style={styles.spacer} />
@@ -346,7 +358,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
                         disabled={!isStepValid()}
                         activeOpacity={0.8}
                     >
-                        <Text style={styles.nextButtonText}>Next →</Text>
+                        <Text style={styles.nextButtonText}>{t('next')} →</Text>
                     </TouchableOpacity>
                 </View>
             )}
@@ -359,7 +371,7 @@ const OnboardingScreen: React.FC<Props> = ({ navigation }) => {
                         onPress={handleBack}
                         activeOpacity={0.7}
                     >
-                        <Text style={styles.backButtonText}>← Back</Text>
+                        <Text style={styles.backButtonText}>← {t('back')}</Text>
                     </TouchableOpacity>
                     <View style={styles.spacer} />
                 </View>

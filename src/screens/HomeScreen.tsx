@@ -3,6 +3,9 @@
  * The main landing screen of Agrisaarthi.
  * Displays a personalized greeting using the farmer's name
  * from AsyncStorage, plus feature cards.
+ *
+ * All user-facing strings are resolved via the useTranslation hook,
+ * so the UI renders in the farmer's preferred language.
  */
 
 import React, { useEffect, useState } from 'react';
@@ -16,9 +19,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../constants/colors';
 import type { FarmerProfile } from '../types/farmer';
+import { useTranslation } from '../hooks/useTranslation';
 
 const HomeScreen: React.FC = () => {
     const [farmerName, setFarmerName] = useState<string>('Farmer');
+
+    /** Translation hook — resolves strings based on saved language */
+    const { t } = useTranslation();
 
     useEffect(() => {
         /** Load farmer profile from AsyncStorage to display greeting */
@@ -47,9 +54,9 @@ const HomeScreen: React.FC = () => {
             {/* ── Header area ────────────────────────────────────────── */}
             <View style={styles.header}>
                 <Text style={styles.headerEmoji}>🌾</Text>
-                <Text style={styles.headerTitle}>Agrisaarthi</Text>
+                <Text style={styles.headerTitle}>{t('appName')}</Text>
                 <Text style={styles.headerSubtitle}>
-                    Your Smart Farming Companion
+                    {t('tagline')}
                 </Text>
             </View>
 
@@ -58,11 +65,10 @@ const HomeScreen: React.FC = () => {
                 <View style={styles.card}>
                     <Text style={styles.cardIcon}>🌱</Text>
                     <Text style={styles.cardTitle}>
-                        Namaste, {farmerName}! 🙏
+                        {t('greeting', { name: farmerName })} 🙏
                     </Text>
                     <Text style={styles.cardDescription}>
-                        Empowering Indian farmers with smart tools for weather
-                        forecasting, crop management, and AI-driven insights.
+                        {t('welcomeDesc')}
                     </Text>
                 </View>
 
@@ -70,15 +76,15 @@ const HomeScreen: React.FC = () => {
                 <View style={styles.featuresRow}>
                     <View style={styles.featurePill}>
                         <Text style={styles.featureEmoji}>🌤️</Text>
-                        <Text style={styles.featureText}>Weather</Text>
+                        <Text style={styles.featureText}>{t('weather')}</Text>
                     </View>
                     <View style={styles.featurePill}>
                         <Text style={styles.featureEmoji}>🤖</Text>
-                        <Text style={styles.featureText}>AI Advice</Text>
+                        <Text style={styles.featureText}>{t('aiAdvice')}</Text>
                     </View>
                     <View style={styles.featurePill}>
                         <Text style={styles.featureEmoji}>🌿</Text>
-                        <Text style={styles.featureText}>Crop Care</Text>
+                        <Text style={styles.featureText}>{t('cropCare')}</Text>
                     </View>
                 </View>
             </View>
@@ -86,7 +92,7 @@ const HomeScreen: React.FC = () => {
             {/* ── Footer tagline ────────────────────────────────────── */}
             <View style={styles.footer}>
                 <Text style={styles.footerText}>
-                    🇮🇳  Made for Indian farmers
+                    🇮🇳  {t('madeForFarmers')}
                 </Text>
             </View>
         </SafeAreaView>
