@@ -15,6 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Screens
 import HomeScreen from '../screens/HomeScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
+import WeatherScreen from '../screens/WeatherScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 // Constants
 import Colors from '../constants/colors';
@@ -26,8 +28,9 @@ import Colors from '../constants/colors';
 export type RootStackParamList = {
     Onboarding: undefined;
     Home: undefined;
+    Weather: undefined;
+    Settings: undefined;
     // Future screens:
-    // Weather: undefined;
     // CropDetails: { cropId: string };
 };
 
@@ -92,6 +95,16 @@ const AppNavigator: React.FC = () => {
                 name="Home"
                 component={HomeScreen}
                 options={{ title: 'Agrisaarthi' }}
+            />
+            <Stack.Screen
+                name="Weather"
+                component={WeatherScreen}
+                options={{ title: 'Weather' }}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{ title: 'Settings' }}
             />
         </Stack.Navigator>
     );

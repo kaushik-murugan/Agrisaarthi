@@ -14,7 +14,11 @@ import {
     Text,
     StyleSheet,
     StatusBar,
+    TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation/AppNavigator';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../constants/colors';
@@ -24,8 +28,11 @@ import { useTranslation } from '../hooks/useTranslation';
 const HomeScreen: React.FC = () => {
     const [farmerName, setFarmerName] = useState<string>('Farmer');
 
+    /** Navigation hook */
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
     /** Translation hook — resolves strings based on saved language */
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
 
     useEffect(() => {
         /** Load farmer profile from AsyncStorage to display greeting */
@@ -42,7 +49,7 @@ const HomeScreen: React.FC = () => {
         };
 
         loadProfile();
-    }, []);
+    }, [language]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -53,11 +60,23 @@ const HomeScreen: React.FC = () => {
 
             {/* ── Header area ────────────────────────────────────────── */}
             <View style={styles.header}>
-                <Text style={styles.headerEmoji}>🌾</Text>
-                <Text style={styles.headerTitle}>{t('appName')}</Text>
-                <Text style={styles.headerSubtitle}>
-                    {t('tagline')}
-                </Text>
+                <View style={styles.headerRow}>
+                    <View style={styles.headerCenter}>
+                        <Text style={styles.headerEmoji}>🌾</Text>
+                        <Text style={styles.headerTitle}>{t('appName')}</Text>
+                        <Text style={styles.headerSubtitle}>
+                            {t('tagline')}
+                        </Text>
+                    </View>
+                    {/* Settings gear icon */}
+                    <TouchableOpacity
+                        style={styles.settingsButton}
+                        onPress={() => navigation.navigate('Settings')}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={styles.settingsIcon}>⚙️</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             {/* ── Welcome card ───────────────────────────────────────── */}
@@ -74,10 +93,14 @@ const HomeScreen: React.FC = () => {
 
                 {/* ── Feature pills ──────────────────────────────────────── */}
                 <View style={styles.featuresRow}>
-                    <View style={styles.featurePill}>
+                    <TouchableOpacity
+                        style={styles.featurePill}
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('Weather')}
+                    >
                         <Text style={styles.featureEmoji}>🌤️</Text>
                         <Text style={styles.featureText}>{t('weather')}</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.featurePill}>
                         <Text style={styles.featureEmoji}>🤖</Text>
                         <Text style={styles.featureText}>{t('aiAdvice')}</Text>
@@ -111,9 +134,16 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         paddingVertical: 32,
         paddingHorizontal: 24,
-        alignItems: 'center',
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
+    },
+    headerRow: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    headerCenter: {
+        flex: 1,
+        alignItems: 'center',
     },
     headerEmoji: {
         fontSize: 48,
@@ -130,6 +160,17 @@ const styles = StyleSheet.create({
         color: Colors.textLight,
         opacity: 0.85,
         marginTop: 4,
+    },
+
+    // Settings button
+    settingsButton: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        padding: 4,
+    },
+    settingsIcon: {
+        fontSize: 28,
     },
 
     // Content
