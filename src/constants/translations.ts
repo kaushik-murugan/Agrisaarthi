@@ -128,6 +128,13 @@ export type TranslationKey =
     | 'changeFarmSize'
     | 'changeIrrigation'
     | 'madeForIndianFarmers'
+    // ── AI Advisory ──
+    | 'aiAdvisor'
+    | 'typeQuestion'
+    | 'send'
+    | 'thinking'
+    | 'quickQuestions'
+    | 'welcomeMessage'
     // ── Error ──
     | 'weatherLoadError';
 
@@ -275,6 +282,13 @@ const en: TranslationMap = {
     changeFarmSize: 'Change Farm Size (acres)',
     changeIrrigation: 'Change Irrigation Type',
     madeForIndianFarmers: 'Made for Indian Farmers 🇮🇳',
+    // AI Advisory
+    aiAdvisor: 'AI Crop Advisor',
+    typeQuestion: 'Type your farming question...',
+    send: 'Send',
+    thinking: 'Thinking...',
+    quickQuestions: 'Quick Questions',
+    welcomeMessage: 'Namaste {name}! 🙏 I\'m your Agrisaarthi assistant. I know you\'re growing {crop} in {location}. How can I help you today?',
     // Error
     weatherLoadError: 'Failed to load weather data. Please try again.',
 };
@@ -397,6 +411,13 @@ const hi: TranslationMap = {
     changeFarmSize: 'खेत का आकार बदलें (एकड़)',
     changeIrrigation: 'सिंचाई प्रकार बदलें',
     madeForIndianFarmers: 'भारतीय किसानों के लिए बनाया गया 🇮🇳',
+    // AI Advisory
+    aiAdvisor: 'AI फसल सलाहकार',
+    typeQuestion: 'अपना खेती सम्बंधित प्रश्न टाइप करें...',
+    send: 'भेजें',
+    thinking: 'सोच रहा हूँ...',
+    quickQuestions: 'त्वरित प्रश्न',
+    welcomeMessage: 'नमस्ते {name}! 🙏 मैं आपका Agrisaarthi सहायक हूँ। मुझे पता है आप {location} में {crop} उगा रहे हैं। मैं आज आपकी कैसे मदद कर सकता हूँ?',
     // Error
     weatherLoadError: 'मौसम डेटा लोड करने में विफल। कृपया पुनः प्रयास करें।',
 };
@@ -519,6 +540,13 @@ const ta: TranslationMap = {
     changeFarmSize: 'பண்ணை அளவை மாற்று (ஏக்கர்)',
     changeIrrigation: 'நீர்ப்பாசன வகையை மாற்று',
     madeForIndianFarmers: 'இந்திய விவசாயிகளுக்காக உருவாக்கப்பட்டது 🇮🇳',
+    // AI Advisory
+    aiAdvisor: 'AI பயிர் ஆலோசகர்',
+    typeQuestion: 'உங்கள் விவசாய கேள்வியை தட்டச்சு செய்க...',
+    send: 'அனுப்பு',
+    thinking: 'யோசிக்கிறது...',
+    quickQuestions: 'விரைவு கேள்விகள்',
+    welcomeMessage: 'வணக்கம் {name}! 🙏 நான் உங்கள் Agrisaarthi உதவியாளர். நீங்கள் {location} இல் {crop} வளர்க்கிறீர்கள் என்று எனக்குத் தெரியும். இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்?',
     // Error
     weatherLoadError: 'வானிலை தரவை ஏற்றுவதில் தோல்வி. மீண்டும் முயற்சிக்கவும்.',
 };
@@ -641,6 +669,13 @@ const te: TranslationMap = {
     changeFarmSize: 'పొలం పరిమాణం మార్చండి (ఎకరాలు)',
     changeIrrigation: 'నీటిపారుదల రకాన్ని మార్చండి',
     madeForIndianFarmers: 'భారతీయ రైతుల కోసం తయారు చేయబడింది 🇮🇳',
+    // AI Advisory
+    aiAdvisor: 'AI పంట సలహాదారు',
+    typeQuestion: 'మీ వ్యవసాయ ప్రశ్నను టైప్ చేయండి...',
+    send: 'పంపు',
+    thinking: 'ఆలోచిస్తోంది...',
+    quickQuestions: 'శీఘ్ర ప్రశ్నలు',
+    welcomeMessage: 'నమస్తే {name}! 🙏 నేను మీ Agrisaarthi సహాయకుడిని. మీరు {location} లో {crop} పండిస్తున్నారని నాకు తెలుసు. ఈ రోజు నేను మీకు ఎలా సహాయం చేయగలను?',
     // Error
     weatherLoadError: 'వాతావరణ డేటా లోడ్ చేయడంలో విఫలం. దయచేసి మళ్లీ ప్రయత్నించండి.',
 };

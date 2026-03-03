@@ -101,10 +101,14 @@ const HomeScreen: React.FC = () => {
                         <Text style={styles.featureEmoji}>🌤️</Text>
                         <Text style={styles.featureText}>{t('weather')}</Text>
                     </TouchableOpacity>
-                    <View style={styles.featurePill}>
+                    <TouchableOpacity
+                        style={styles.featurePill}
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('AIAdvisory')}
+                    >
                         <Text style={styles.featureEmoji}>🤖</Text>
                         <Text style={styles.featureText}>{t('aiAdvice')}</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.featurePill}>
                         <Text style={styles.featureEmoji}>🌿</Text>
                         <Text style={styles.featureText}>{t('cropCare')}</Text>

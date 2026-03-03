@@ -17,6 +17,7 @@ import HomeScreen from '../screens/HomeScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import WeatherScreen from '../screens/WeatherScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AIAdvisoryScreen from '../screens/AIAdvisoryScreen';
 
 // Constants
 import Colors from '../constants/colors';
@@ -30,6 +31,7 @@ export type RootStackParamList = {
     Home: undefined;
     Weather: undefined;
     Settings: undefined;
+    AIAdvisory: undefined;
     // Future screens:
     // CropDetails: { cropId: string };
 };
@@ -105,6 +107,11 @@ const AppNavigator: React.FC = () => {
                 name="Settings"
                 component={SettingsScreen}
                 options={{ title: 'Settings' }}
+            />
+            <Stack.Screen
+                name="AIAdvisory"
+                component={AIAdvisoryScreen}
+                options={{ title: 'AI Advisor' }}
             />
         </Stack.Navigator>
     );
