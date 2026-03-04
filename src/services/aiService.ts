@@ -10,11 +10,14 @@ export const getAIAdvice = async (
     farmerProfile: any,
     weatherData: any
 ): Promise<string> => {
+    console.log('=== AI SERVICE CALLED ===');
+    console.log('Farmer profile received:', JSON.stringify(farmerProfile));
+    console.log('Farmer language:', farmerProfile?.language);
+
     try {
         const apiKey = process.env.EXPO_PUBLIC_GROQ_API_KEY;
 
         // Debug logs
-        console.log('=== AI Service Debug ===');
         console.log('Groq API Key exists:', !!apiKey);
         console.log('API Key length:', apiKey?.length);
         console.log('Question:', question);

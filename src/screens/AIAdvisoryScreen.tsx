@@ -158,9 +158,15 @@ const AIAdvisoryScreen: React.FC = () => {
             try {
                 // Load farmer profile
                 const raw = await AsyncStorage.getItem('farmer_profile');
+                console.log('Raw AsyncStorage data:', raw);
+
+                const parsed = JSON.parse(raw || '{}');
+                console.log('Parsed farmer profile:', JSON.stringify(parsed));
+                console.log('Language from profile:', parsed.preferredLanguage);
+
                 let farmerProfile: FarmerProfile | null = null;
                 if (raw) {
-                    farmerProfile = JSON.parse(raw);
+                    farmerProfile = parsed;
                     setProfile(farmerProfile);
                 }
 
@@ -215,21 +221,33 @@ const AIAdvisoryScreen: React.FC = () => {
             setIsTyping(true);
             scrollToBottom();
 
-            // Get AI response
-            const defaultProfile: FarmerProfile = {
+            // Get AI response — map FarmerProfile fields to aiService expected names
+            const activeProfile = profile ?? {
                 fullName: 'Farmer',
                 village: 'Delhi',
-                preferredLanguage: 'English',
-                primaryCrop: 'Wheat',
-                soilType: 'Loamy',
+                preferredLanguage: 'English' as const,
+                primaryCrop: 'Wheat' as const,
+                soilType: 'Loamy' as const,
                 farmSize: '5',
-                irrigationType: 'Rainfed',
+                irrigationType: 'Rainfed' as const,
                 createdAt: new Date().toISOString(),
             };
 
+            const mappedProfile = {
+                name: activeProfile.fullName,
+                location: activeProfile.village,
+                language: activeProfile.preferredLanguage,
+                crop: activeProfile.primaryCrop,
+                soilType: activeProfile.soilType,
+                farmSize: activeProfile.farmSize,
+                irrigationType: activeProfile.irrigationType,
+            };
+
+            console.log('Mapped profile for AI:', JSON.stringify(mappedProfile));
+
             const aiResponse = await getAIAdvice(
                 question,
-                profile ?? defaultProfile,
+                mappedProfile,
                 weather,
             );
 
