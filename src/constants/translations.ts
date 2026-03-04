@@ -135,6 +135,12 @@ export type TranslationKey =
     | 'thinking'
     | 'quickQuestions'
     | 'welcomeMessage'
+    // ── Quick question buttons ──
+    | 'shouldIIrrigate'
+    | 'anyPestRisk'
+    | 'whatFertilizer'
+    | 'isWeatherGood'
+    | 'whatTodoToday'
     // ── Error ──
     | 'weatherLoadError';
 
@@ -289,6 +295,12 @@ const en: TranslationMap = {
     thinking: 'Thinking...',
     quickQuestions: 'Quick Questions',
     welcomeMessage: 'Namaste {name}! 🙏 I\'m your Agrisaarthi assistant. I know you\'re growing {crop} in {location}. How can I help you today?',
+    // Quick question buttons
+    shouldIIrrigate: 'Should I irrigate today? 💧',
+    anyPestRisk: 'Any pest risk this week? 🐛',
+    whatFertilizer: 'What fertilizer should I use? 🌱',
+    isWeatherGood: 'Is this weather good for my crop? 🌤️',
+    whatTodoToday: 'What should I do today on my farm? 📋',
     // Error
     weatherLoadError: 'Failed to load weather data. Please try again.',
 };
@@ -418,6 +430,12 @@ const hi: TranslationMap = {
     thinking: 'सोच रहा हूँ...',
     quickQuestions: 'त्वरित प्रश्न',
     welcomeMessage: 'नमस्ते {name}! 🙏 मैं आपका Agrisaarthi सहायक हूँ। मुझे पता है आप {location} में {crop} उगा रहे हैं। मैं आज आपकी कैसे मदद कर सकता हूँ?',
+    // Quick question buttons
+    shouldIIrrigate: 'क्या मुझे आज सिंचाई करनी चाहिए? 💧',
+    anyPestRisk: 'इस हफ्ते कोई कीट का खतरा? 🐛',
+    whatFertilizer: 'मुझे कौन सा उर्वरक इस्तेमाल करना चाहिए? 🌱',
+    isWeatherGood: 'क्या यह मौसम मेरी फसल के लिए अच्छा है? 🌤️',
+    whatTodoToday: 'आज मुझे अपने खेत में क्या करना चाहिए? 📋',
     // Error
     weatherLoadError: 'मौसम डेटा लोड करने में विफल। कृपया पुनः प्रयास करें।',
 };
@@ -547,6 +565,12 @@ const ta: TranslationMap = {
     thinking: 'யோசிக்கிறது...',
     quickQuestions: 'விரைவு கேள்விகள்',
     welcomeMessage: 'வணக்கம் {name}! 🙏 நான் உங்கள் Agrisaarthi உதவியாளர். நீங்கள் {location} இல் {crop} வளர்க்கிறீர்கள் என்று எனக்குத் தெரியும். இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்?',
+    // Quick question buttons
+    shouldIIrrigate: 'இன்று நீர்ப்பாசனம் செய்ய வேண்டுமா? 💧',
+    anyPestRisk: 'இந்த வாரம் ஏதேனும் பூச்சி ஆபத்து? 🐛',
+    whatFertilizer: 'நான் எந்த உரத்தை பயன்படுத்த வேண்டும்? 🌱',
+    isWeatherGood: 'இந்த வானிலை என் பயிருக்கு நல்லதா? 🌤️',
+    whatTodoToday: 'இன்று என் பண்ணையில் நான் என்ன செய்ய வேண்டும்? 📋',
     // Error
     weatherLoadError: 'வானிலை தரவை ஏற்றுவதில் தோல்வி. மீண்டும் முயற்சிக்கவும்.',
 };
@@ -676,6 +700,12 @@ const te: TranslationMap = {
     thinking: 'ఆలోచిస్తోంది...',
     quickQuestions: 'శీఘ్ర ప్రశ్నలు',
     welcomeMessage: 'నమస్తే {name}! 🙏 నేను మీ Agrisaarthi సహాయకుడిని. మీరు {location} లో {crop} పండిస్తున్నారని నాకు తెలుసు. ఈ రోజు నేను మీకు ఎలా సహాయం చేయగలను?',
+    // Quick question buttons
+    shouldIIrrigate: 'నేను ఈ రోజు నీటిపారుదల చేయాలా? 💧',
+    anyPestRisk: 'ఈ వారం ఏదైనా పురుగు ప్రమాదం ఉందా? 🐛',
+    whatFertilizer: 'నేను ఏ ఎరువు వాడాలి? 🌱',
+    isWeatherGood: 'ఈ వాతావరణం నా పంటకు మంచిదా? 🌤️',
+    whatTodoToday: 'ఈ రోజు నా పొలంలో నేను ఏమి చేయాలి? 📋',
     // Error
     weatherLoadError: 'వాతావరణ డేటా లోడ్ చేయడంలో విఫలం. దయచేసి మళ్లీ ప్రయత్నించండి.',
 };

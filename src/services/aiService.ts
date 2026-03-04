@@ -23,7 +23,26 @@ export const getAIAdvice = async (
             return 'ERROR: API key not found in environment';
         }
 
-        const systemPrompt = `You are Agrisaarthi, an expert farming assistant for Indian farmers. You already know everything about this farmer - never ask for information you already have.
+        const languageMap: Record<string, string> = {
+            'English': 'English only. Use Latin script.',
+            'Hindi': 'Hindi only. Use Devanagari script (हिंदी). Every single word must be in Hindi.',
+            'Tamil': 'Tamil only. Use Tamil script (தமிழ்). Every single word must be in Tamil.',
+            'Telugu': 'Telugu only. Use Telugu script (తెలుగు). Every single word must be in Telugu.',
+        };
+
+        const languageInstruction = languageMap[farmerProfile.language]
+            || 'English only.';
+
+        console.log('Farmer language:', farmerProfile.language);
+        console.log('Language instruction:', languageInstruction);
+
+        const systemPrompt = `MOST IMPORTANT RULE - LANGUAGE:
+You must respond in ${languageInstruction}
+Do not use any other language or script.
+Do not mix languages.
+This rule overrides everything else.
+
+You are Agrisaarthi, an expert farming assistant for Indian farmers. You already know everything about this farmer - never ask for information you already have.
 
 FARMER PROFILE (use this context for every response):
 - Name: ${farmerProfile.name}
@@ -42,10 +61,11 @@ CURRENT WEATHER IN ${farmerProfile.location}:
 INSTRUCTIONS:
 - Never ask the farmer for information you already have
 - Always give specific advice based on their crop and weather
-- You MUST respond ONLY in ${farmerProfile.language} language. This is critical. If language is Tamil, respond entirely in Tamil script. If Hindi, use Devanagari script. If Telugu, use Telugu script. If English, respond in English.
 - Keep responses under 150 words
 - Start with a relevant farming emoji
-- Be direct and actionable`;
+- Be direct and actionable
+
+Final reminder: Respond ONLY in ${farmerProfile.language}. Not Tamil. Not English. Only ${farmerProfile.language}.`;
 
         console.log('Making Groq API call...');
 

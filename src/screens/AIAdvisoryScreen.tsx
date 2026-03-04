@@ -44,15 +44,7 @@ interface ChatMessage {
     timestamp: Date;
 }
 
-// ── Quick question presets ─────────────────────────────────────────────
-
-const QUICK_QUESTIONS = [
-    { text: 'Should I irrigate today? 💧', key: 'quickIrrigate' },
-    { text: 'Any pest risk this week? 🐛', key: 'quickPest' },
-    { text: 'What fertilizer should I use? 🌱', key: 'quickFertilizer' },
-    { text: 'Is this weather good for my crop? 🌤️', key: 'quickWeather' },
-    { text: 'What should I do today on my farm? 📋', key: 'quickToday' },
-];
+// (Quick questions are now derived from translations inside the component)
 
 // ── Typing Indicator ───────────────────────────────────────────────────
 
@@ -120,6 +112,15 @@ const AIAdvisoryScreen: React.FC = () => {
     const navigation =
         useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const { t } = useTranslation();
+
+    // ── Translated quick question presets ──────────────────────────
+    const quickQuestions = [
+        { text: t('shouldIIrrigate'), key: 'shouldIIrrigate' },
+        { text: t('anyPestRisk'), key: 'anyPestRisk' },
+        { text: t('whatFertilizer'), key: 'whatFertilizer' },
+        { text: t('isWeatherGood'), key: 'isWeatherGood' },
+        { text: t('whatTodoToday'), key: 'whatTodoToday' },
+    ];
 
     // State
     const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -303,7 +304,7 @@ const AIAdvisoryScreen: React.FC = () => {
                             <Text style={styles.quickQuestionsLabel}>
                                 💡 {t('quickQuestions')}
                             </Text>
-                            {QUICK_QUESTIONS.map((q) => (
+                            {quickQuestions.map((q) => (
                                 <TouchableOpacity
                                     key={q.key}
                                     style={styles.quickButton}
